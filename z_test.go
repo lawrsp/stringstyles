@@ -176,3 +176,12 @@ func TestKebabCase(t *testing.T) {
 		t.Errorf("conver %s failed: want %s got %s", input, expected, output)
 	}
 }
+
+func TestStudlyCaps(t *testing.T) {
+	input := "TheQuickBrownFoxJumpsOverTheLazyDog"
+	expected := "ThEquICkbROwNFoXJumPSOVErTHElazyDOg"
+	output := StudlyCaps(input, 31283726224234348)
+	if output != expected {
+		t.Errorf("conver %s failed: want %s got %s", input, expected, output)
+	}
+}

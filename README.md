@@ -43,3 +43,16 @@ output := stringstyles.SnakeCase(input)
 // got:
 // the-quick-brown-fox-jumps-over-the-lazy-dog
 ```
+
+### StudlyCaps
+
+```golang
+import "github.com/lawrsp/stringstyles"
+
+input := "TheQuickBrownFoxJumpsOverTheLazyDog"
+random := 31283726224234348
+output := stringstyles.StudlyCaps(input, random)
+
+// got:
+// ThEquICkbROwNFoXJumPSOVErTHElazyDOg
+```
