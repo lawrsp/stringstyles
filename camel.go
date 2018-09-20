@@ -12,6 +12,10 @@ func CamelCase(s string) string {
 	for i, d := range bs {
 		switch {
 		case isUpper(d):
+			// X... => x...
+			// ...xX => ...xX
+			// ...X => ...X
+			// ...XX => ...Xx
 			if abbrvLen == 0 && i != 0 {
 				data = append(data, d)
 			} else {
@@ -20,6 +24,9 @@ func CamelCase(s string) string {
 			abbrvLen += 1
 			isNoChar = false
 		case isLower(d):
+			//...x => ...x
+			//...#x=> ...X
+			//x... => x...
 			if abbrvLen > 1 {
 				dlen := len(data)
 				data[dlen-1] = lowerToUper(data[dlen-1])
@@ -33,6 +40,12 @@ func CamelCase(s string) string {
 
 			abbrvLen = 0
 			isNoChar = false
+		case isNumber(d):
+			//1... => 1...
+			//...1 => ...1
+			data = append(data, d)
+			abbrvLen = 0
+			isNoChar = true
 		default:
 			abbrvLen = 0
 			isNoChar = true

@@ -40,7 +40,16 @@ func TestSankeCase(t *testing.T) {
 	if output != expected {
 		t.Errorf("conver %s failed: want %s got %s", input, expected, output)
 	}
+
+	// with numbers
+	input = "AAz123Az3zAA34ZAazAA1"
+	expected = "a_az_123_az_3_z_aa_34_z_aaz_aa_1"
+	output = SnakeCase(input)
+	if output != expected {
+		t.Errorf("conver %s failed: want %s got %s", input, expected, output)
+	}
 }
+
 func TestScreamingSankeCase(t *testing.T) {
 	input := "TheQuickBrownFoxJumpsOverTheLazyDog"
 	expected := "THE_QUICK_BROWN_FOX_JUMPS_OVER_THE_LAZY_DOG"
@@ -107,6 +116,15 @@ func TestCamelCase(t *testing.T) {
 	if output != expected {
 		t.Errorf("conver %s failed: want %s got %s", input, expected, output)
 	}
+
+	// with numbers
+	input = "a-az-123-az-3-z-aa-34-z-aaz-aa-1"
+	expected = "aAz123Az3ZAa34ZAazAa1"
+	output = CamelCase(input)
+	if output != expected {
+		t.Errorf("conver %s failed: want %s got %s", input, expected, output)
+	}
+
 }
 
 func TestPascalCase(t *testing.T) {
@@ -175,6 +193,15 @@ func TestKebabCase(t *testing.T) {
 	if output != expected {
 		t.Errorf("conver %s failed: want %s got %s", input, expected, output)
 	}
+
+	// with numbers
+	input = "AAz123Az3zAA34ZAazAA1"
+	expected = "a-az-123-az-3-z-aa-34-z-aaz-aa-1"
+	output = KebabCase(input)
+	if output != expected {
+		t.Errorf("conver %s failed: want %s got %s", input, expected, output)
+	}
+
 }
 
 func TestStudlyCaps(t *testing.T) {

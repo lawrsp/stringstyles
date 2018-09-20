@@ -15,3 +15,7 @@ func upperToLower(c byte) byte {
 func lowerToUper(c byte) byte {
 	return c - 32
 }
+
+func isNumber(c byte) bool {
+	return c >= '0' && c <= '9'
+}

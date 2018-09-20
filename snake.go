@@ -6,8 +6,9 @@ import (
 
 func snakeCase(s string, sep byte) string {
 	data := make([]byte, 0, len(s)*2)
-	isUnderscore := true
+	lastIsUnderscore := true
 	abbrvLen := 0
+	lastIsNumber := false
 
 	bs := []byte(s)
 	dp := 0
@@ -15,7 +16,9 @@ func snakeCase(s string, sep byte) string {
 	for _, d := range bs {
 		switch {
 		case isUpper(d):
-			if !isUnderscore && abbrvLen == 0 {
+			// ..X => .._x
+			// ..XX => .._xx
+			if !lastIsUnderscore && abbrvLen == 0 {
 				data = append(data, sep)
 				dp += 1
 			}
@@ -23,26 +26,51 @@ func snakeCase(s string, sep byte) string {
 			dp += 1
 
 			abbrvLen += 1
-			isUnderscore = false
+			lastIsNumber = false
+			lastIsUnderscore = false
 		case isLower(d):
+			// ..x => ..x
+			// ..XYy => ..x_yy
+			// ..123x => ...123_x
 			if abbrvLen > 1 {
 				data = append(data, data[dp-1])
 				data[dp-1] = sep
 				dp += 1
 			}
 
+			if lastIsNumber {
+				data = append(data, sep)
+				dp += 1
+			}
+
 			data = append(data, d)
 			dp += 1
 
-			isUnderscore = false
 			abbrvLen = 0
-		default:
-			if !isUnderscore {
+			lastIsNumber = false
+			lastIsUnderscore = false
+		case isNumber(d):
+			// ...1 => ..._1
+			// ...123 => ..._123
+			if !lastIsUnderscore && !lastIsNumber {
 				data = append(data, sep)
 				dp += 1
-				isUnderscore = true
+			}
+
+			data = append(data, d)
+			dp += 1
+
+			abbrvLen = 0
+			lastIsNumber = true
+			lastIsUnderscore = false
+		default:
+			if !lastIsUnderscore {
+				data = append(data, sep)
+				dp += 1
+				lastIsUnderscore = true
 			}
 			abbrvLen = 0
+			lastIsNumber = false
 		}
 	}
 
