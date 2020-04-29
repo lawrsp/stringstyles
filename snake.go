@@ -78,15 +78,15 @@ func snakeCase(s string, sep byte) string {
 }
 
 // SnakeCase
-// Punctuation is removed and spaces are replaced by single underscores
-// "the_quick_brown_fox_jumps_over_the_lazy_dog"
+// Punctuation is removed and spaces are replaced by single underscores.
+// e.g. "the_quick_brown_fox_jumps_over_the_lazy_dog"
 func SnakeCase(s string) string {
 	return snakeCase(s, '_')
 }
 
 // ScreamingSnakeCase
-// SnakeCase with call charactor capitalised
-// "SCREAMING_SNAKE_CASE"
+// SnakeCase with call charactor capitalised.
+// e.g. "SCREAMING_SNAKE_CASE"
 func ScreamingSnakeCase(s string) string {
 	ss := SnakeCase(s)
 	return strings.ToUpper(ss)

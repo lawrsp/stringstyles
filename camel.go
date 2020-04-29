@@ -2,7 +2,7 @@ package stringstyles
 
 // CamelCase
 // Spaces and punctuation are removed and the first letter of each word is capitalised.
-// "theQuickBrownFoxJumpsOverTheLazyDog"
+// e.g. "theQuickBrownFoxJumpsOverTheLazyDog"
 func CamelCase(s string) string {
 	data := make([]byte, 0, len(s))
 	bs := []byte(s)

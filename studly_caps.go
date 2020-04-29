@@ -6,7 +6,7 @@ func getBit(src uint64, pos uint) uint64 {
 }
 
 // Studly caps
-// Mixed case with no semantic or syntactic significance to the use of the capitals
+// Mixed case with no semantic or syntactic significance to the use of the capitals.
 // e.g. "tHeqUicKBrOWnFoXJUmpsoVeRThElAzydOG"
 func StudlyCaps(s string, random uint64) string {
 	data := make([]byte, 0, len(s))
